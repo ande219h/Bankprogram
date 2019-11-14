@@ -1,4 +1,4 @@
-class KontoFelt {
+class KontoFelt extends Komponent{
 
   float formue = 0;
 
@@ -8,7 +8,7 @@ class KontoFelt {
     this.x = x;
     this.y = y;
   }
-
+@Override
   void tegn() {
     fill(200);
     rect(x,y,250,70);

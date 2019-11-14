@@ -6,47 +6,55 @@
 //Opgave 6. Forbind knapperne med hver konto , så du kan indsætte på de forskellige konti
 //Udfordring 6. Prøv at udtænk en måde at visualisere konto bevægelser
 //Udfordring 7. Prøv at udtænke en måde at give din konto en rente
+ArrayList <Komponent> liste = new ArrayList <Komponent>();
 
 Knap       kontoknap1 = new Knap(30, 100);
 Knap       kontoknap2 = new Knap(330, 100);
 
 TekstFelt  tekstFelt = new TekstFelt(30, 40);
 
-KontoFelt  kontoFelt1     = new KontoFelt(30,150);
-KontoFelt  kontoFelt2     = new KontoFelt(330,150);
+KontoFelt  kontoFelt1     = new KontoFelt(30, 150);
+KontoFelt  kontoFelt2     = new KontoFelt(330, 150);
+
+Checkbox box=new Checkbox(330, 40, 255);
+
 
 void setup() {
   size(1000, 500);
   frameRate(60);
   kontoknap1.tekst = "Tryk for indsæt beløb på KONTO1";
   kontoknap2.tekst = "Tryk for indsæt beløb på KONTO2";
+  //tilføjelser til arraylist
+  liste.add(kontoknap1);
+  liste.add(kontoknap2);
+  liste.add(tekstFelt);
+  liste.add(kontoFelt1);
+  liste.add(kontoFelt2);
+  liste.add(box);
 }
 
 void draw() {
   clear();
-  kontoknap1.tegn();
-  kontoknap1.registrerKlik();
-
-  kontoknap2.tegn();
-  kontoknap2.registrerKlik();
-
-  tekstFelt.tegn(); 
-  tekstFelt.registrerKlik();
-
-  if (kontoknap1.erKlikket()) {
+  for (Komponent k : liste) {
+    k.tegn();
+  }
+  if (box.klikket && kontoknap1.erKlikket()  ||  kontoknap2.erKlikket()) {
     kontoFelt1.formue = kontoFelt1.formue + tekstFelt.hentBelob();
-    tekstFelt.ryd();
-  }  
-
-  if (kontoknap2.erKlikket()) {
     kontoFelt2.formue = kontoFelt2.formue + tekstFelt.hentBelob();
     tekstFelt.ryd();
-  }  
+  } else if (kontoknap1.erKlikket()) {
+    kontoFelt1.formue = kontoFelt1.formue + tekstFelt.hentBelob();
+    tekstFelt.ryd();
+  } else if (kontoknap2.erKlikket()) {
+    kontoFelt2.formue = kontoFelt2.formue + tekstFelt.hentBelob();
+    tekstFelt.ryd();
+  }
+}
 
-
-  kontoFelt1.tegn();
-  kontoFelt2.tegn();
-
+void mousePressed() {
+  for (Komponent k : liste) {
+    k.registrerKlik();
+  }
 }
 
 void keyPressed() {

@@ -1,24 +1,24 @@
-class Knap {
+class Knap extends Komponent {
 
   String tekst;
 
   float xPosition = 10, yPosition  = 5;
   float hojdeKnap = 25, breddeKnap = 250;
-
   boolean klikket;
 
-  Knap(float x, float y){
+
+  Knap(float x, float y) {
     this.xPosition = x;
     this.yPosition = y;
   }
+  @Override
 
-
-  void tegn() {
+    void tegn() {
     fill(100, 0, 0);
     if (klikket) {
       fill(100, 100, 0);
     }
-    rect(xPosition, yPosition, breddeKnap, hojdeKnap,10);
+    rect(xPosition, yPosition, breddeKnap, hojdeKnap, 10);
     fill(255);
     text(tekst, xPosition+10, yPosition+18);
   }
